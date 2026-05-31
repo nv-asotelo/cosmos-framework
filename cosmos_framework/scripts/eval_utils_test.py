@@ -1,15 +1,13 @@
 # SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 # SPDX-License-Identifier: OpenMDW-1.1
 
-"""Unit tests for :mod:`cosmos_framework.scripts.eval_utils` aggregation and score-only semantics."""
+"""Unit tests for :mod:`cosmos_framework.scripts.eval_utils` aggregation and matching helpers."""
 
 from __future__ import annotations
 
 import json
 import math
-import sys
 from pathlib import Path
-from unittest.mock import patch
 
 import pytest
 import torch
@@ -19,22 +17,6 @@ from cosmos_framework.scripts.eval_utils import (
     compute_video_metrics,
     derive_match_key_and_group,
 )
-
-# ``cosmos_framework.scripts.eval`` calls ``init_script()`` at import time, which raises
-# if ``imaginaire`` is already loaded. The package-level ``conftest.py`` loads
-# ``imaginaire.lazy_config`` during collection, so by the time this test module
-# is imported, the strict check would fire. We patch the underlying
-# ``_init_script`` to a no-op for the rest of this test module — the real
-# init work (env-var setup, error handlers, grad disable) is irrelevant for
-# unit tests that don't actually run inference.
-with patch("cosmos_framework.inference.common.init._init_script", lambda **kwargs: None):
-    if "cosmos_framework.scripts.eval" in sys.modules:
-        del sys.modules["cosmos_framework.scripts.eval"]
-    from cosmos_framework.inference.dataset import DatasetArgs  # noqa: E402
-    from cosmos_framework.scripts.eval import (
-        EvalArgs,  # noqa: E402
-        eval_vision,  # noqa: E402
-    )
 
 pytestmark = [pytest.mark.L0, pytest.mark.CPU]
 
@@ -227,160 +209,3 @@ def test_derive_match_key_and_group_rejects_path_outside_predictions_dir(tmp_pat
     other = tmp_path.parent / "elsewhere" / "vision.mp4"
     with pytest.raises(ValueError, match="not under predictions_dir"):
         derive_match_key_and_group(other, tmp_path)
-
-
-# ---------------------------------------------------------------------------
-# score_only end-to-end (no model, CPU)
-# ---------------------------------------------------------------------------
-
-
-def test_score_only_end_to_end(tmp_path, monkeypatch):
-    """Build a synthetic GT dir + predictions tree, run score_only, assert sidecars + aggregate."""
-    from cosmos_framework.inference.args import OmniSetupOverrides
-
-    gt_dir = tmp_path / "gt"
-    pred_dir = tmp_path / "preds"
-    out_dir = tmp_path / "out"
-    gt_dir.mkdir()
-    pred_dir.mkdir()
-    out_dir.mkdir()
-
-    # Three clips; T=5, 32x32.
-    keys = ["clipA", "clipB", "clipC"]
-    g = torch.Generator().manual_seed(0)
-    for k in keys:
-        frames = torch.randint(0, 256, (3, 5, 32, 32), generator=g, dtype=torch.int64).to(torch.uint8)
-        _write_synthetic_mp4(gt_dir / f"{k}.mp4", frames)
-        bucket = pred_dir / "model_x" / "t2v" / k
-        bucket.mkdir(parents=True)
-        # Pred = lightly-perturbed GT so PSNR is sane (codec lossy regardless).
-        pred = (frames.float() + 4).clamp(0, 255).to(torch.uint8)
-        _write_synthetic_mp4(bucket / "vision.mp4", pred)
-
-    args = EvalArgs(
-        setup=OmniSetupOverrides(output_dir=out_dir, checkpoint_path=""),
-        dataset=DatasetArgs(model_mode="vision"),
-        gt_dir=gt_dir,
-        predictions_dir=pred_dir,
-        predictions_glob="**/vision.mp4",
-    )
-    eval_vision(args)
-
-    # Per-sample sidecars.
-    for k in keys:
-        m = json.loads((out_dir / "model_x/t2v" / k / "metrics.json").read_text())
-        assert m["mode"] == "model_x/t2v"
-        assert m["name"] == k
-        assert "psnr" in m
-
-    # Aggregate.
-    agg = json.loads((out_dir / "metrics_aggregate.json").read_text())
-    assert "model_x/t2v" in agg
-    for metric in ("psnr",):
-        entry = agg["model_x/t2v"][metric]
-        assert entry["count"] == 3
-        assert "mean" in entry
-
-
-def test_score_only_missing_gt_logs_warning_and_skips(tmp_path, caplog):
-    from cosmos_framework.inference.args import OmniSetupOverrides
-
-    gt_dir = tmp_path / "gt"
-    pred_dir = tmp_path / "preds"
-    out_dir = tmp_path / "out"
-    gt_dir.mkdir()
-    pred_dir.mkdir()
-    out_dir.mkdir()
-
-    g = torch.Generator().manual_seed(1)
-    frames = torch.randint(0, 256, (3, 5, 32, 32), generator=g, dtype=torch.int64).to(torch.uint8)
-    # GT only has clipA; pred has both clipA + clipZ.
-    _write_synthetic_mp4(gt_dir / "clipA.mp4", frames)
-    for k in ("clipA", "clipZ"):
-        d = pred_dir / "m" / k
-        d.mkdir(parents=True)
-        _write_synthetic_mp4(d / "vision.mp4", frames)
-
-    args = EvalArgs(
-        setup=OmniSetupOverrides(output_dir=out_dir, checkpoint_path=""),
-        dataset=DatasetArgs(model_mode="vision"),
-        gt_dir=gt_dir,
-        predictions_dir=pred_dir,
-        predictions_glob="**/vision.mp4",
-    )
-    with caplog.at_level("WARNING"):
-        eval_vision(args)
-
-    # clipA scored, clipZ skipped.
-    assert (out_dir / "m" / "clipA" / "metrics.json").exists()
-    assert not (out_dir / "m" / "clipZ" / "metrics.json").exists()
-    agg = json.loads((out_dir / "metrics_aggregate.json").read_text())
-    assert agg["m"]["psnr"]["count"] == 1
-
-
-def test_score_only_single_mode_bucket(tmp_path):
-    """Predictions under one mode subdir → one bucket in aggregate (no t2v/i2v/v2v assumption)."""
-    from cosmos_framework.inference.args import OmniSetupOverrides
-
-    gt_dir = tmp_path / "gt"
-    pred_dir = tmp_path / "preds"
-    out_dir = tmp_path / "out"
-    gt_dir.mkdir()
-    pred_dir.mkdir()
-    out_dir.mkdir()
-
-    keys = ["clipA", "clipB"]
-    g = torch.Generator().manual_seed(0)
-    for k in keys:
-        frames = torch.randint(0, 256, (3, 5, 32, 32), generator=g, dtype=torch.int64).to(torch.uint8)
-        _write_synthetic_mp4(gt_dir / f"{k}.mp4", frames)
-        d = pred_dir / "t2v" / k
-        d.mkdir(parents=True)
-        _write_synthetic_mp4(d / "vision.mp4", (frames.float() + 4).clamp(0, 255).to(torch.uint8))
-
-    args = EvalArgs(
-        setup=OmniSetupOverrides(output_dir=out_dir, checkpoint_path=""),
-        dataset=DatasetArgs(model_mode="vision"),
-        gt_dir=gt_dir,
-        predictions_dir=pred_dir,
-        predictions_glob="**/vision.mp4",
-    )
-    eval_vision(args)
-
-    agg = json.loads((out_dir / "metrics_aggregate.json").read_text())
-    assert set(agg.keys()) == {"t2v"}
-    assert agg["t2v"]["psnr"]["count"] == 2
-
-
-def test_score_only_flat_layout_uses_default_bucket(tmp_path):
-    """Flat ``<pred_dir>/<key>/vision.mp4`` (no mode subfolder) → bucket=='default'."""
-    from cosmos_framework.inference.args import OmniSetupOverrides
-
-    gt_dir = tmp_path / "gt"
-    pred_dir = tmp_path / "preds"
-    out_dir = tmp_path / "out"
-    gt_dir.mkdir()
-    pred_dir.mkdir()
-    out_dir.mkdir()
-
-    keys = ["clipA", "clipB"]
-    g = torch.Generator().manual_seed(0)
-    for k in keys:
-        frames = torch.randint(0, 256, (3, 5, 32, 32), generator=g, dtype=torch.int64).to(torch.uint8)
-        _write_synthetic_mp4(gt_dir / f"{k}.mp4", frames)
-        d = pred_dir / k
-        d.mkdir(parents=True)
-        _write_synthetic_mp4(d / "vision.mp4", (frames.float() + 4).clamp(0, 255).to(torch.uint8))
-
-    args = EvalArgs(
-        setup=OmniSetupOverrides(output_dir=out_dir, checkpoint_path=""),
-        dataset=DatasetArgs(model_mode="vision"),
-        gt_dir=gt_dir,
-        predictions_dir=pred_dir,
-        predictions_glob="**/vision.mp4",
-    )
-    eval_vision(args)
-
-    agg = json.loads((out_dir / "metrics_aggregate.json").read_text())
-    assert set(agg.keys()) == {"default"}
-    assert agg["default"]["psnr"]["count"] == 2

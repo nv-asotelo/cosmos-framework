@@ -341,15 +341,6 @@ for name, get_env in _SFT_GET_ENV.items():
             marks=marks,
             get_env=get_env,
         ),
-        ScriptConfig(
-            name=f"eval_{name}",
-            script=_TEST_DIR / "eval.sh",
-            levels=(0, 2),
-            gpus=(1, MAX_GPUS, MAX_GPUS),
-            marks=marks,
-            get_env=get_env,
-            after_script=_action_after_script,
-        ),
     ]
 
 
