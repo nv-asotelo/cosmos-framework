@@ -1,0 +1,88 @@
+{
+  "id": "robot-arm",
+  "title": "robot arm pick up stuff",
+  "status": "success",
+  "elapsed_seconds": 12.90095829963684,
+  "media_url": "/examples/robot_tape.png",
+  "media_kind": "image",
+  "media_mime": "image/png",
+  "media_request_source": "local-data-url",
+  "params": {
+    "top_p": 0.3,
+    "top_k": 20,
+    "repetition_penalty": 1.2,
+    "presence_penalty": 0.0,
+    "temperature": 0.3,
+    "frames_per_second": 2,
+    "max_tokens": 4096
+  },
+  "prompt": "You are given the task \"Move the tape into the basket\". Specify the 2D trajectory your end effector should follow in pixel space. Return the trajectory coordinates in JSON format like this: {\"point_2d\": [x, y], \"label\": \"gripper trajectory\"}.\n\nPrompt format:\nAnswer the question using the following format:\n<think>\nYour reasoning.\n</think>\nWrite your final answer immediately after the </think> tag.",
+  "system_prompt": "You are a helpful assistant.",
+  "answer": "```json\n[\n  {\"point_2d\": [410, 536], \"label\": \"gripper trajectory\"},\n  {\"point_2d\": [410, 536], \"label\": \"gripper trajectory\"},\n  {\"point_2d\": [410, 536], \"label\": \"gripper trajectory\"},\n  {\"point_2d\": [410, 536], \"label\": \"gripper trajectory\"},\n  {\"point_2d\": [413, 369], \"label\": \"gripper trajectory\"}\n]\n```",
+  "reasoning": "I will move my gripper from its current position at [410, 536] to the blue tape roll at [505, 721] to grasp it. After I have secured the tape roll, I will lift it and carry it to the open space between the roll and the basket at [495, 605], which gives me a clear path toward the target. Then I will carefully maneuver the tape roll into the gray woven basket at [460, 400], making sure it is fully placed inside. This sequence should give me a safe and precise transfer of the tape roll from its initial spot to the basket.\n\nSo my next steps should look like this: [410, 536], [410, 536], [410, 536], [410, 536], [413, 369]",
+  "raw": {
+    "status": "success",
+    "message": "",
+    "content": "```json\n[\n  {\"point_2d\": [410, 536], \"label\": \"gripper trajectory\"},\n  {\"point_2d\": [410, 536], \"label\": \"gripper trajectory\"},\n  {\"point_2d\": [410, 536], \"label\": \"gripper trajectory\"},\n  {\"point_2d\": [410, 536], \"label\": \"gripper trajectory\"},\n  {\"point_2d\": [413, 369], \"label\": \"gripper trajectory\"}\n]\n```",
+    "reasoning": "I will move my gripper from its current position at [410, 536] to the blue tape roll at [505, 721] to grasp it. After I have secured the tape roll, I will lift it and carry it to the open space between the roll and the basket at [495, 605], which gives me a clear path toward the target. Then I will carefully maneuver the tape roll into the gray woven basket at [460, 400], making sure it is fully placed inside. This sequence should give me a safe and precise transfer of the tape roll from its initial spot to the basket.\n\nSo my next steps should look like this: [410, 536], [410, 536], [410, 536], [410, 536], [413, 369]",
+    "combined_content": "<think>\nI will move my gripper from its current position at [410, 536] to the blue tape roll at [505, 721] to grasp it. After I have secured the tape roll, I will lift it and carry it to the open space between the roll and the basket at [495, 605], which gives me a clear path toward the target. Then I will carefully maneuver the tape roll into the gray woven basket at [460, 400], making sure it is fully placed inside. This sequence should give me a safe and precise transfer of the tape roll from its initial spot to the basket.\n\nSo my next steps should look like this: [410, 536], [410, 536], [410, 536], [410, 536], [413, 369]\n</think>\n\n```json\n[\n  {\"point_2d\": [410, 536], \"label\": \"gripper trajectory\"},\n  {\"point_2d\": [410, 536], \"label\": \"gripper trajectory\"},\n  {\"point_2d\": [410, 536], \"label\": \"gripper trajectory\"},\n  {\"point_2d\": [410, 536], \"label\": \"gripper trajectory\"},\n  {\"point_2d\": [413, 369], \"label\": \"gripper trajectory\"}\n]\n```",
+    "schema": "vllm_reasoning_fields",
+    "openai": {
+      "id": "chatcmpl-cosmos3-edge-1782345742190",
+      "object": "chat.completion",
+      "created": 1782345742,
+      "model": "nvidia/Cosmos3-Edge-Reasoner",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "```json\n[\n  {\"point_2d\": [410, 536], \"label\": \"gripper trajectory\"},\n  {\"point_2d\": [410, 536], \"label\": \"gripper trajectory\"},\n  {\"point_2d\": [410, 536], \"label\": \"gripper trajectory\"},\n  {\"point_2d\": [410, 536], \"label\": \"gripper trajectory\"},\n  {\"point_2d\": [413, 369], \"label\": \"gripper trajectory\"}\n]\n```",
+            "reasoning_content": "I will move my gripper from its current position at [410, 536] to the blue tape roll at [505, 721] to grasp it. After I have secured the tape roll, I will lift it and carry it to the open space between the roll and the basket at [495, 605], which gives me a clear path toward the target. Then I will carefully maneuver the tape roll into the gray woven basket at [460, 400], making sure it is fully placed inside. This sequence should give me a safe and precise transfer of the tape roll from its initial spot to the basket.\n\nSo my next steps should look like this: [410, 536], [410, 536], [410, 536], [410, 536], [413, 369]"
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": null
+    },
+    "media": {
+      "mode": "image_url"
+    },
+    "payload": {
+      "model": "nvidia/Cosmos3-Edge-Reasoner",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant."
+        },
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "image_url",
+              "image_url": {
+                "url": "<data-url>"
+              }
+            },
+            {
+              "type": "text",
+              "text": "You are given the task \"Move the tape into the basket\". Specify the 2D trajectory your end effector should follow in pixel space. Return the trajectory coordinates in JSON format like this: {\"point_2d\": [x, y], \"label\": \"gripper trajectory\"}.\n\nPrompt format:\nAnswer the question using the following format:\n<think>\nYour reasoning.\n</think>\nWrite your final answer immediately after the </think> tag."
+            }
+          ]
+        }
+      ],
+      "temperature": 0.3,
+      "top_p": 0.3,
+      "repetition_penalty": 1.2,
+      "presence_penalty": 0,
+      "max_tokens": 4096,
+      "top_k": 20,
+      "mm_processor_kwargs": {
+        "fps": 2,
+        "do_sample_frames": true
+      }
+    }
+  },
+  "usage": null,
+  "issues": []
+}

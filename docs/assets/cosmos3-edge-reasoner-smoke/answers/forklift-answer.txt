@@ -1,0 +1,5 @@
+{
+  "location": "The stack of bottled water on the pallet under the forklift",
+  "estimated_weight": "150 lbs (or 100 lbs, depending on exact count)",
+  "within_limit": true
+}
