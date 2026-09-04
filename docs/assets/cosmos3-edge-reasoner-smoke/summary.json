@@ -1,0 +1,87 @@
+{
+  "generated_at": "2026-06-25T00:06:51+00:00",
+  "active_model": "nvidia/Cosmos3-Edge-Reasoner",
+  "example_count": 6,
+  "records": [
+    {
+      "id": "robotics-next-action",
+      "title": "Robotics Next Action Prediction",
+      "status": "success",
+      "elapsed_seconds": 12.480498552322388,
+      "issues": [],
+      "first_frame": "/var/local/home/horde/cosmos3-edge/smoke/build-nvidia-20260625T000154Z/frames/robotics-next-action-first-frame.jpg",
+      "trace_file": "/var/local/home/horde/cosmos3-edge/smoke/build-nvidia-20260625T000154Z/traces/robotics-next-action-trace.txt",
+      "answer_file": "/var/local/home/horde/cosmos3-edge/smoke/build-nvidia-20260625T000154Z/answers/robotics-next-action-answer.txt",
+      "raw_file": "/var/local/home/horde/cosmos3-edge/smoke/build-nvidia-20260625T000154Z/raw/robotics-next-action.json",
+      "answer_preview": "Robot Arm 2 transports the USB Type C cable to the cardboard box and places it inside, possibly arranging it alongside the plastic tubes or within the air column wraps for cushioning.",
+      "trace_preview": "Okay, let's see. The video is a lab or workshop with two robot arms. The main focus is on Robot Arm 2, which just picked up a USB-C cable. The setup includes a cardboard box with plastic tubes, air column wraps, and o..."
+    },
+    {
+      "id": "robot-arm",
+      "title": "robot arm pick up stuff",
+      "status": "success",
+      "elapsed_seconds": 12.90095829963684,
+      "issues": [],
+      "first_frame": "/var/local/home/horde/cosmos3-edge/smoke/build-nvidia-20260625T000154Z/frames/robot-arm-first-frame.jpg",
+      "trace_file": "/var/local/home/horde/cosmos3-edge/smoke/build-nvidia-20260625T000154Z/traces/robot-arm-trace.txt",
+      "answer_file": "/var/local/home/horde/cosmos3-edge/smoke/build-nvidia-20260625T000154Z/answers/robot-arm-answer.txt",
+      "raw_file": "/var/local/home/horde/cosmos3-edge/smoke/build-nvidia-20260625T000154Z/raw/robot-arm.json",
+      "answer_preview": "```json [ {\"point_2d\": [410, 536], \"label\": \"gripper trajectory\"}, {\"point_2d\": [410, 536], \"label\": \"gripper trajectory\"}, {\"point_2d\": [410, 536], \"label\": \"gripper trajectory\"}, {\"point_2d\": [410, 536], \"label\": \"g...",
+      "trace_preview": "I will move my gripper from its current position at [410, 536] to the blue tape roll at [505, 721] to grasp it. After I have secured the tape roll, I will lift it and carry it to the open space between the roll and th..."
+    },
+    {
+      "id": "sdg-critic",
+      "title": "SDG critic",
+      "status": "success",
+      "elapsed_seconds": 14.723478555679321,
+      "issues": [
+        "model_reasoning_topic_mismatch_robot_policy"
+      ],
+      "first_frame": "/var/local/home/horde/cosmos3-edge/smoke/build-nvidia-20260625T000154Z/frames/sdg-critic-first-frame.jpg",
+      "trace_file": "/var/local/home/horde/cosmos3-edge/smoke/build-nvidia-20260625T000154Z/traces/sdg-critic-trace.txt",
+      "answer_file": "/var/local/home/horde/cosmos3-edge/smoke/build-nvidia-20260625T000154Z/answers/sdg-critic-answer.txt",
+      "raw_file": "/var/local/home/horde/cosmos3-edge/smoke/build-nvidia-20260625T000154Z/raw/sdg-critic.json",
+      "answer_preview": "Reject",
+      "trace_preview": "I will move my gripper to [207, 100] to approach the blue block at [630, 290] and grasp it. Then I will lift the blue block from the yellow block at [560, 586] and reposition it to the left of the yellow block, making..."
+    },
+    {
+      "id": "warehouse",
+      "title": "warehouse",
+      "status": "success",
+      "elapsed_seconds": 37.59118127822876,
+      "issues": [],
+      "first_frame": "/var/local/home/horde/cosmos3-edge/smoke/build-nvidia-20260625T000154Z/frames/warehouse-first-frame.jpg",
+      "trace_file": "/var/local/home/horde/cosmos3-edge/smoke/build-nvidia-20260625T000154Z/traces/warehouse-trace.txt",
+      "answer_file": "/var/local/home/horde/cosmos3-edge/smoke/build-nvidia-20260625T000154Z/answers/warehouse-answer.txt",
+      "raw_file": "/var/local/home/horde/cosmos3-edge/smoke/build-nvidia-20260625T000154Z/raw/warehouse.json",
+      "answer_preview": "Worker 2",
+      "trace_preview": "Okay, let's see. The question is asking which worker picked up the dropped box. The video shows two workers: one in a yellow safety vest (Worker 0) and another in a plaid shirt (Worker 2). First, I need to check the a..."
+    },
+    {
+      "id": "forklift",
+      "title": "forklift load weight evaluation",
+      "status": "success",
+      "elapsed_seconds": 113.95955753326416,
+      "issues": [],
+      "first_frame": "/var/local/home/horde/cosmos3-edge/smoke/build-nvidia-20260625T000154Z/frames/forklift-first-frame.jpg",
+      "trace_file": "/var/local/home/horde/cosmos3-edge/smoke/build-nvidia-20260625T000154Z/traces/forklift-trace.txt",
+      "answer_file": "/var/local/home/horde/cosmos3-edge/smoke/build-nvidia-20260625T000154Z/answers/forklift-answer.txt",
+      "raw_file": "/var/local/home/horde/cosmos3-edge/smoke/build-nvidia-20260625T000154Z/raw/forklift.json",
+      "answer_preview": "{ \"location\": \"The stack of bottled water on the pallet under the forklift\", \"estimated_weight\": \"150 lbs (or 100 lbs, depending on exact count)\", \"within_limit\": true }",
+      "trace_preview": "Got it, let's tackle this problem step by step. First, we need to identify the load in the forklift. The load is a stack of bottled water, probably around 100 bottles or so, but let's estimate. Then, we need to check ..."
+    },
+    {
+      "id": "mail-package",
+      "title": "mail package",
+      "status": "success",
+      "elapsed_seconds": 87.88841819763184,
+      "issues": [],
+      "first_frame": "/var/local/home/horde/cosmos3-edge/smoke/build-nvidia-20260625T000154Z/frames/mail-package-first-frame.jpg",
+      "trace_file": "/var/local/home/horde/cosmos3-edge/smoke/build-nvidia-20260625T000154Z/traces/mail-package-trace.txt",
+      "answer_file": "/var/local/home/horde/cosmos3-edge/smoke/build-nvidia-20260625T000154Z/answers/mail-package-answer.txt",
+      "raw_file": "/var/local/home/horde/cosmos3-edge/smoke/build-nvidia-20260625T000154Z/raw/mail-package.json",
+      "answer_preview": "The person is likely allowed to pick up the packages. The video shows the man carrying a box and approaching the house with packages placed outside. There is no explicit indication of restrictions (e.g., signs, locked...",
+      "trace_preview": "Okay, let's try to figure out if the person in the video is allowed to pick up the packages. The video shows a man approaching a house with packages outside. He's wearing casual clothes and a cap, and he's carrying a ..."
+    }
+  ]
+}
