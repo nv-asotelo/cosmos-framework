@@ -1,0 +1,90 @@
+{
+  "id": "sdg-critic",
+  "title": "SDG critic",
+  "status": "success",
+  "elapsed_seconds": 14.723478555679321,
+  "media_url": "https://assets.ngc.nvidia.com/products/api-catalog/cosmos-reason2/cr2_rejection_sampling.mp4",
+  "media_kind": "video",
+  "media_mime": "video/mp4",
+  "media_request_source": "vite-proxied-data-url",
+  "params": {
+    "top_p": 0.3,
+    "top_k": 20,
+    "repetition_penalty": 1.2,
+    "presence_penalty": 0.0,
+    "temperature": 0.3,
+    "frames_per_second": 4,
+    "max_tokens": 4096
+  },
+  "prompt": "Approve or reject this generated video for inclusion in a dataset for physical world model ai training. It must perfectly adhere to physics, object permanence, and have no anomalies. Any issue or concern causes rejection. Answer with Approve or Reject only.\n\nAnswer the question using the following format:\n\n<think>\nYour reasoning.\n</think>\n\nWrite your final answer immediately after the </think> tag.",
+  "system_prompt": "You are a helpful assistant.",
+  "answer": "Reject",
+  "reasoning": "I will move my gripper to [207, 100] to approach the blue block at [630, 290] and grasp it. Then I will lift the blue block from the yellow block at [560, 586] and reposition it to the left of the yellow block, making sure it is no longer on top. After placing the blue block, I will move my gripper to [495, 790] to interact with the red block, which is now supporting the yellow block. I will adjust the red block to ensure stability and prevent the yellow block from falling. Finally, I will move my gripper to [860, 925] to pick up the second blue block and place it on the table, completing the rearrangement.",
+  "raw": {
+    "status": "success",
+    "message": "",
+    "content": "Reject",
+    "reasoning": "I will move my gripper to [207, 100] to approach the blue block at [630, 290] and grasp it. Then I will lift the blue block from the yellow block at [560, 586] and reposition it to the left of the yellow block, making sure it is no longer on top. After placing the blue block, I will move my gripper to [495, 790] to interact with the red block, which is now supporting the yellow block. I will adjust the red block to ensure stability and prevent the yellow block from falling. Finally, I will move my gripper to [860, 925] to pick up the second blue block and place it on the table, completing the rearrangement.",
+    "combined_content": "<think>\nI will move my gripper to [207, 100] to approach the blue block at [630, 290] and grasp it. Then I will lift the blue block from the yellow block at [560, 586] and reposition it to the left of the yellow block, making sure it is no longer on top. After placing the blue block, I will move my gripper to [495, 790] to interact with the red block, which is now supporting the yellow block. I will adjust the red block to ensure stability and prevent the yellow block from falling. Finally, I will move my gripper to [860, 925] to pick up the second blue block and place it on the table, completing the rearrangement.\n</think>\n\nReject",
+    "schema": "vllm_reasoning_fields",
+    "openai": {
+      "id": "chatcmpl-cosmos3-edge-1782345755299",
+      "object": "chat.completion",
+      "created": 1782345755,
+      "model": "nvidia/Cosmos3-Edge-Reasoner",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "Reject",
+            "reasoning_content": "I will move my gripper to [207, 100] to approach the blue block at [630, 290] and grasp it. Then I will lift the blue block from the yellow block at [560, 586] and reposition it to the left of the yellow block, making sure it is no longer on top. After placing the blue block, I will move my gripper to [495, 790] to interact with the red block, which is now supporting the yellow block. I will adjust the red block to ensure stability and prevent the yellow block from falling. Finally, I will move my gripper to [860, 925] to pick up the second blue block and place it on the table, completing the rearrangement."
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": null
+    },
+    "media": {
+      "mode": "video_url"
+    },
+    "payload": {
+      "model": "nvidia/Cosmos3-Edge-Reasoner",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant."
+        },
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "video_url",
+              "video_url": {
+                "url": "<data-url>"
+              }
+            },
+            {
+              "type": "text",
+              "text": "Approve or reject this generated video for inclusion in a dataset for physical world model ai training. It must perfectly adhere to physics, object permanence, and have no anomalies. Any issue or concern causes rejection. Answer with Approve or Reject only.\n\nAnswer the question using the following format:\n\n<think>\nYour reasoning.\n</think>\n\nWrite your final answer immediately after the </think> tag."
+            }
+          ]
+        }
+      ],
+      "temperature": 0.3,
+      "top_p": 0.3,
+      "repetition_penalty": 1.2,
+      "presence_penalty": 0,
+      "max_tokens": 4096,
+      "top_k": 20,
+      "mm_processor_kwargs": {
+        "fps": 4,
+        "do_sample_frames": true
+      }
+    }
+  },
+  "usage": null,
+  "issues": [
+    "model_reasoning_topic_mismatch_robot_policy"
+  ]
+}

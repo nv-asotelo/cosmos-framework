@@ -1,0 +1,9 @@
+```json
+[
+  {"point_2d": [410, 536], "label": "gripper trajectory"},
+  {"point_2d": [410, 536], "label": "gripper trajectory"},
+  {"point_2d": [410, 536], "label": "gripper trajectory"},
+  {"point_2d": [410, 536], "label": "gripper trajectory"},
+  {"point_2d": [413, 369], "label": "gripper trajectory"}
+]
+```
