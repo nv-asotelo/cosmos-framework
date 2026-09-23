@@ -1,0 +1,88 @@
+{
+  "id": "warehouse",
+  "title": "warehouse",
+  "status": "success",
+  "elapsed_seconds": 37.59118127822876,
+  "media_url": "https://assets.ngc.nvidia.com/products/api-catalog/cosmos-reason2/cr2_warehouse.mp4",
+  "media_kind": "video",
+  "media_mime": "video/mp4",
+  "media_request_source": "vite-proxied-data-url",
+  "params": {
+    "top_p": 0.3,
+    "top_k": 20,
+    "repetition_penalty": 1.2,
+    "presence_penalty": 0.0,
+    "temperature": 0.3,
+    "frames_per_second": 2,
+    "max_tokens": 4096
+  },
+  "prompt": "Which worker picked up the dropped box?\n\nAnswer the question using the following format:\n\n<think>\nYour reasoning.\n</think>\n\nWrite your final answer immediately after the </think> tag.",
+  "system_prompt": "You are a helpful warehouse monitoring system.",
+  "answer": "Worker 2",
+  "reasoning": "Okay, let's see. The question is asking which worker picked up the dropped box. The video shows two workers: one in a yellow safety vest (Worker 0) and another in a plaid shirt (Worker 2). \n\nFirst, I need to check the actions of each worker. Worker 0 is carrying boxes, drops one, and then walks away. The video shows that after dropping the box, he walks away. So he didn't pick it up again.\n\nThen there's Worker 2. The video shows that after the dropped box, Worker 2 approaches the fallen box, bends down to pick it up, and then walks away. So clearly, Worker 2 is the one who picked up the dropped box. \n\nThe other workers shown are the one in the yellow vest (Worker 0) and the one in the plaid shirt (Worker 2). The video does not show any other workers. So the answer should be Worker 2.",
+  "raw": {
+    "status": "success",
+    "message": "",
+    "content": "Worker 2",
+    "reasoning": "Okay, let's see. The question is asking which worker picked up the dropped box. The video shows two workers: one in a yellow safety vest (Worker 0) and another in a plaid shirt (Worker 2). \n\nFirst, I need to check the actions of each worker. Worker 0 is carrying boxes, drops one, and then walks away. The video shows that after dropping the box, he walks away. So he didn't pick it up again.\n\nThen there's Worker 2. The video shows that after the dropped box, Worker 2 approaches the fallen box, bends down to pick it up, and then walks away. So clearly, Worker 2 is the one who picked up the dropped box. \n\nThe other workers shown are the one in the yellow vest (Worker 0) and the one in the plaid shirt (Worker 2). The video does not show any other workers. So the answer should be Worker 2.",
+    "combined_content": "<think>\nOkay, let's see. The question is asking which worker picked up the dropped box. The video shows two workers: one in a yellow safety vest (Worker 0) and another in a plaid shirt (Worker 2). \n\nFirst, I need to check the actions of each worker. Worker 0 is carrying boxes, drops one, and then walks away. The video shows that after dropping the box, he walks away. So he didn't pick it up again.\n\nThen there's Worker 2. The video shows that after the dropped box, Worker 2 approaches the fallen box, bends down to pick it up, and then walks away. So clearly, Worker 2 is the one who picked up the dropped box. \n\nThe other workers shown are the one in the yellow vest (Worker 0) and the one in the plaid shirt (Worker 2). The video does not show any other workers. So the answer should be Worker 2.\n</think>\n\nWorker 2",
+    "schema": "vllm_reasoning_fields",
+    "openai": {
+      "id": "chatcmpl-cosmos3-edge-1782345770602",
+      "object": "chat.completion",
+      "created": 1782345770,
+      "model": "nvidia/Cosmos3-Edge-Reasoner",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "Worker 2",
+            "reasoning_content": "Okay, let's see. The question is asking which worker picked up the dropped box. The video shows two workers: one in a yellow safety vest (Worker 0) and another in a plaid shirt (Worker 2). \n\nFirst, I need to check the actions of each worker. Worker 0 is carrying boxes, drops one, and then walks away. The video shows that after dropping the box, he walks away. So he didn't pick it up again.\n\nThen there's Worker 2. The video shows that after the dropped box, Worker 2 approaches the fallen box, bends down to pick it up, and then walks away. So clearly, Worker 2 is the one who picked up the dropped box. \n\nThe other workers shown are the one in the yellow vest (Worker 0) and the one in the plaid shirt (Worker 2). The video does not show any other workers. So the answer should be Worker 2."
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": null
+    },
+    "media": {
+      "mode": "video_url"
+    },
+    "payload": {
+      "model": "nvidia/Cosmos3-Edge-Reasoner",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful warehouse monitoring system."
+        },
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "video_url",
+              "video_url": {
+                "url": "<data-url>"
+              }
+            },
+            {
+              "type": "text",
+              "text": "Which worker picked up the dropped box?\n\nAnswer the question using the following format:\n\n<think>\nYour reasoning.\n</think>\n\nWrite your final answer immediately after the </think> tag."
+            }
+          ]
+        }
+      ],
+      "temperature": 0.3,
+      "top_p": 0.3,
+      "repetition_penalty": 1.2,
+      "presence_penalty": 0,
+      "max_tokens": 4096,
+      "top_k": 20,
+      "mm_processor_kwargs": {
+        "fps": 2,
+        "do_sample_frames": true
+      }
+    }
+  },
+  "usage": null,
+  "issues": []
+}

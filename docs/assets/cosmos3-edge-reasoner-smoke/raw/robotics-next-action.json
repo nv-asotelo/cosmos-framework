@@ -1,0 +1,88 @@
+{
+  "id": "robotics-next-action",
+  "title": "Robotics Next Action Prediction",
+  "status": "success",
+  "elapsed_seconds": 12.480498552322388,
+  "media_url": "/examples/agibot.mp4",
+  "media_kind": "video",
+  "media_mime": "video/mp4",
+  "media_request_source": "local-url",
+  "params": {
+    "top_p": 0.95,
+    "top_k": 20,
+    "repetition_penalty": 1.0,
+    "presence_penalty": 0.0,
+    "temperature": 0.6,
+    "frames_per_second": 4,
+    "max_tokens": 4096
+  },
+  "prompt": "What can be the next immediate action?\n\nAnswer the question using the following format:\n\n<think>\nYour reasoning.\n</think>\n\nWrite your final answer immediately after the </think> tag.",
+  "system_prompt": "You are a helpful assistant.",
+  "answer": "Robot Arm 2 transports the USB Type C cable to the cardboard box and places it inside, possibly arranging it alongside the plastic tubes or within the air column wraps for cushioning.",
+  "reasoning": "Okay, let's see. The video is a lab or workshop with two robot arms. The main focus is on Robot Arm 2, which just picked up a USB-C cable. The setup includes a cardboard box with plastic tubes, air column wraps, and other items. The task seems to be packing or organizing.\n\nSince Robot Arm 2 has just lifted the USB cable, the next logical step would be to move it to the cardboard box. The box is on the left, and the arm is on the right. So, the arm would need to transport the cable from the right side to the box on the left. After moving, it would place the cable into the box, maybe arranging it with the plastic tubes. Alternatively, maybe placing it into the air column wraps for cushioning. But since the air column wraps are already in the box, perhaps the next action is placing the cable into the box. The other robot arm (Arm 1) is stationary, so maybe Arm 2 is handling the main task here. So the immediate next action is moving the USB cable towards the box and placing it inside.",
+  "raw": {
+    "status": "success",
+    "message": "",
+    "content": "Robot Arm 2 transports the USB Type C cable to the cardboard box and places it inside, possibly arranging it alongside the plastic tubes or within the air column wraps for cushioning.",
+    "reasoning": "Okay, let's see. The video is a lab or workshop with two robot arms. The main focus is on Robot Arm 2, which just picked up a USB-C cable. The setup includes a cardboard box with plastic tubes, air column wraps, and other items. The task seems to be packing or organizing.\n\nSince Robot Arm 2 has just lifted the USB cable, the next logical step would be to move it to the cardboard box. The box is on the left, and the arm is on the right. So, the arm would need to transport the cable from the right side to the box on the left. After moving, it would place the cable into the box, maybe arranging it with the plastic tubes. Alternatively, maybe placing it into the air column wraps for cushioning. But since the air column wraps are already in the box, perhaps the next action is placing the cable into the box. The other robot arm (Arm 1) is stationary, so maybe Arm 2 is handling the main task here. So the immediate next action is moving the USB cable towards the box and placing it inside.",
+    "combined_content": "<think>\nOkay, let's see. The video is a lab or workshop with two robot arms. The main focus is on Robot Arm 2, which just picked up a USB-C cable. The setup includes a cardboard box with plastic tubes, air column wraps, and other items. The task seems to be packing or organizing.\n\nSince Robot Arm 2 has just lifted the USB cable, the next logical step would be to move it to the cardboard box. The box is on the left, and the arm is on the right. So, the arm would need to transport the cable from the right side to the box on the left. After moving, it would place the cable into the box, maybe arranging it with the plastic tubes. Alternatively, maybe placing it into the air column wraps for cushioning. But since the air column wraps are already in the box, perhaps the next action is placing the cable into the box. The other robot arm (Arm 1) is stationary, so maybe Arm 2 is handling the main task here. So the immediate next action is moving the USB cable towards the box and placing it inside.\n</think>\n\nRobot Arm 2 transports the USB Type C cable to the cardboard box and places it inside, possibly arranging it alongside the plastic tubes or within the air column wraps for cushioning.",
+    "schema": "vllm_reasoning_fields",
+    "openai": {
+      "id": "chatcmpl-cosmos3-edge-1782345729619",
+      "object": "chat.completion",
+      "created": 1782345729,
+      "model": "nvidia/Cosmos3-Edge-Reasoner",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "Robot Arm 2 transports the USB Type C cable to the cardboard box and places it inside, possibly arranging it alongside the plastic tubes or within the air column wraps for cushioning.",
+            "reasoning_content": "Okay, let's see. The video is a lab or workshop with two robot arms. The main focus is on Robot Arm 2, which just picked up a USB-C cable. The setup includes a cardboard box with plastic tubes, air column wraps, and other items. The task seems to be packing or organizing.\n\nSince Robot Arm 2 has just lifted the USB cable, the next logical step would be to move it to the cardboard box. The box is on the left, and the arm is on the right. So, the arm would need to transport the cable from the right side to the box on the left. After moving, it would place the cable into the box, maybe arranging it with the plastic tubes. Alternatively, maybe placing it into the air column wraps for cushioning. But since the air column wraps are already in the box, perhaps the next action is placing the cable into the box. The other robot arm (Arm 1) is stationary, so maybe Arm 2 is handling the main task here. So the immediate next action is moving the USB cable towards the box and placing it inside."
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": null
+    },
+    "media": {
+      "mode": "video_url"
+    },
+    "payload": {
+      "model": "nvidia/Cosmos3-Edge-Reasoner",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a helpful assistant."
+        },
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "video_url",
+              "video_url": {
+                "url": "<data-url>"
+              }
+            },
+            {
+              "type": "text",
+              "text": "What can be the next immediate action?\n\nAnswer the question using the following format:\n\n<think>\nYour reasoning.\n</think>\n\nWrite your final answer immediately after the </think> tag."
+            }
+          ]
+        }
+      ],
+      "temperature": 0.6,
+      "top_p": 0.95,
+      "repetition_penalty": 1,
+      "presence_penalty": 0,
+      "max_tokens": 4096,
+      "top_k": 20,
+      "mm_processor_kwargs": {
+        "fps": 4,
+        "do_sample_frames": true
+      }
+    }
+  },
+  "usage": null,
+  "issues": []
+}
